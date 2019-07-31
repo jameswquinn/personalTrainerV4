@@ -1,1 +1,2 @@
-# personalTrainerV4
+# personalTrainer
+early build for personal trainer portfolio site
