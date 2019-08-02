@@ -60,7 +60,8 @@ export default class Home extends Component {
 
     window.addEventListener("scroll", this.handleOpacity);
     window.addEventListener('scroll', this.handleParallax);
-    
+    this.handleAnimation();
+
   }
 
   componentWillUnmount() {
@@ -79,11 +80,26 @@ export default class Home extends Component {
   handleOpacity = () => {
     const target = document.querySelectorAll('[data-opacity]')
     target.forEach(function (element) {
-      element.classList.remove("fade-in");
       let pos = parseInt(element.dataset.opacity);
       element.style.opacity = 1 - Math.max(0, window.pageYOffset / pos);
     })
   };
+
+  handleAnimation = () => {
+    const target = document.querySelectorAll('[data-fade]')
+    target.forEach(function (element) {
+      let timeout = parseInt(element.dataset.fade);
+   
+      element.classList.add("fade-in__arrow");
+      setTimeout(function () {element.classList.remove("fade-in__arrow")}, timeout);
+      
+    })
+  };
+
+
+
+ 
+
 
   render() {
     return (
@@ -92,7 +108,7 @@ export default class Home extends Component {
         <Helmet title="My Title Hay James" />
         <header class="video-header">
           <video class="masthead-video" src={require("../video/intro2.mp4")} autoplay loop playsinline muted poster={require("../img/s3-news-tmp-77017-pulp-fiction-053--2x1--940.jpg").src}></video>
-              <div data-opacity="100" class="masthead-arrow fade-in">
+          <div data-opacity="100" data-fade="3700" class="masthead-arrow">
                 <svg viewBox="0 0 32 32">
                 <title>arrow</title>
                 <path fill="#f5f5f5" d="M16 32c8.859 0 16-7.141 16-16s-7.141-16-16-16-16 7.141-16 16 7.141 16 16 16z"></path>
@@ -103,7 +119,7 @@ export default class Home extends Component {
         </header>
 
        
-          <div>
+        <div>
           <h3>Exercise where you want, when you want. Get healthier, stronger and more confident.</h3>
           <p>Let’s face it, getting in shape can be hard.</p>
           <p>Our PTs will create and deliver personalized 1-2-1 workouts, we will show you what to do, and support you every step of the way!</p>
