@@ -67,6 +67,7 @@ export default class Home extends Component {
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleOpacity);
     window.removeEventListener('scroll', this.handleParallax);
+    this.handleAnimation();
   }
 
   handleParallax = () => {
@@ -86,12 +87,12 @@ export default class Home extends Component {
   };
 
   handleAnimation = () => {
-    const target = document.querySelectorAll('[data-fade]')
+    const target = document.querySelectorAll('[data-timeout], [data-delay]')
     target.forEach(function (element) {
-      let timeout = parseInt(element.dataset.fade);
-   
-      element.classList.add("fade-in__arrow");
-      setTimeout(function () {element.classList.remove("fade-in__arrow")}, timeout);
+      let timeout = parseInt(element.dataset.timeout) || 0;
+      let delay = parseInt(element.dataset.delay) || 0;
+      element.classList.add("fade-in");
+      setTimeout(function () {element.classList.remove("fade-in")}, timeout + delay);
       
     })
   };
@@ -108,7 +109,7 @@ export default class Home extends Component {
         <Helmet title="My Title Hay James" />
         <header class="video-header">
           <video class="masthead-video" src={require("../video/intro2.mp4")} autoplay loop playsinline muted poster={require("../img/s3-news-tmp-77017-pulp-fiction-053--2x1--940.jpg").src}></video>
-          <div data-opacity="100" data-fade="3700" class="masthead-arrow">
+          <div data-opacity="100" data-timeout="3700" class="masthead-arrow">
                 <svg viewBox="0 0 32 32">
                 <title>arrow</title>
                 <path fill="#f5f5f5" d="M16 32c8.859 0 16-7.141 16-16s-7.141-16-16-16-16 7.141-16 16 7.141 16 16 16z"></path>

@@ -44,7 +44,7 @@ header {
   z-index: var(--masthead-arrow__z-index);
 }
 
-.fade-in__arrow {
+.fade-in {
     	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms both;
           animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2500ms both;
 }
